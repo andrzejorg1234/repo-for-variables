@@ -9,7 +9,7 @@ env:
 
 jobs:
   display-variables:
-    name: ${{vars.ENVIRONMENT_VAR}}
+    name: display env - ${{vars.ENVIRONMENT_VAR}}
     runs-on: ubuntu-latest
     steps:
     - name: Use variables 1
