@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Set color
         id: color-selector
-        run: echo "COLOR=blue" >> $GITHUB_ENV
+        run: echo "COLOR=blue" >> $GITHUB_OUTPUT
       - name: Get color
         env:
           COLOR: ${{ steps.color-selector.outputs.COLOR }}
@@ -25,14 +25,19 @@ jobs:
       - name: Make a sentence
         id: sentence_maker
         run: |
-            echo "message=Hello, world!" >> $GITHUB_ENV
+            echo "message=Hello, world!" >> $GITHUB_OUTPUT
+        outputs:
+          full-message: ${{ steps.sentence_maker.outputs.message }}
 
   consumer:
     runs-on: ubuntu-latest
+    needs: producer
     steps:
       - name: Print the message
+        env:
+          MESSAGE: ${{ jobs.producer.outputs.full-message }}
         run: |
-          echo ${jobs.producer.outputs.message}
+          echo ${MESSAGE}
 
   job_1:
     name: Add 3 and 7
@@ -42,7 +47,7 @@ jobs:
         run: |
           expr 3 + 7 > calc_result.txt
       - name: Upload result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: calc_result
           path: calc_result.txt
@@ -53,7 +58,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: calc_result
       - shell: bash
