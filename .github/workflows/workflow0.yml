@@ -1,11 +1,15 @@
+name: Workflow 0 - Variables
 on:
   workflow_dispatch:
 env:
   cat_name: "Puszek"
+  REPOSITORY_VAR: "${{vars.REPOSITORY_VAR}}"
+  ORGANIZATION_VAR: "${{vars.ORGANIZATION_VAR}}"
+  ENVIRONMENT_VAR: "${{vars.ENVIRONMENT_VAR}}"
 
 jobs:
   display-variables:
-    name: ${{ env.ENVIRONMENT_VAR }} - ${{env.JOB_VAR}} - ${{env.STEP_VAR}}
+    name: ${{env.ENVIRONMENT_VAR}}
     runs-on: ubuntu-latest
     steps:
     - name: Use variables 1
