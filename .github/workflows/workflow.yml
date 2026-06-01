@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: Print the message
         env:
-          MESSAGE: ${{ jobs.producer.outputs.full-message }}
+          MESSAGE: ${{ needs.producer.outputs.full-message }}
         run: |
           echo ${MESSAGE}
 
