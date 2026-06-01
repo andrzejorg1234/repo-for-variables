@@ -26,8 +26,8 @@ jobs:
         id: sentence_maker
         run: |
             echo "message=Hello, world!" >> $GITHUB_OUTPUT
-        outputs:
-          full-message: ${{ steps.sentence_maker.outputs.message }}
+    outputs:
+      full-message: ${{ steps.sentence_maker.outputs.message }}
 
   consumer:
     runs-on: ubuntu-latest
