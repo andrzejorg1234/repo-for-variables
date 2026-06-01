@@ -10,11 +10,12 @@ env:
 jobs:
   display-variables:
     name: display env - ${{vars.ENVIRONMENT_VAR}}
+    environment: test
     runs-on: ubuntu-latest
     steps:
     - name: Use variables 1
       run: |
-        echo "Repository variable : ${{vars.REPOSITORY_VAR}}"
+        echo "Repository variable : ${{env.st.REPOSITORY_VAR}}"
         echo "Organization variable : ${{vars.ORGANIZATION_VAR}}"
         echo "Environment variable : ${{vars.ENVIRONMENT_VAR}}"
         echo "Alice has a cat named <PRINT HERE THE CAT NAME STORED IN THE cat_name VARIABLE>"
